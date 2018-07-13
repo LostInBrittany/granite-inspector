@@ -24,7 +24,7 @@ const baseStyles = (theme) => {
     }
     dom-node-preview .htmlCloseTag.offsetLeft {
         /* hack: offset placeholder */
-        margin-left: -${theme.TREENODE_PADDING_LEFT};
+        margin-left: -${theme.TREENODE_PADDING_LEFT}px;
     }
     dom-node-preview .htmlCloseTag.tagName {
         color: ${theme.HTML_TAGNAME_COLOR};
@@ -40,7 +40,7 @@ const baseStyles = (theme) => {
     granite-inspector-tree-node .treeArrow {
       display: inline-block;
       user-select: none;
-      font-size: ${theme.ARROW_FONT_SIZE}px;
+      font-size: ${theme.ARROW_FONT_SIZE}px;px;
       margin-right: ${theme.ARROW_MARGIN_RIGHT}px;
       color: ${theme.ARROW_COLOR};
     }
@@ -59,55 +59,59 @@ const baseStyles = (theme) => {
         background-color: ${theme.BASE_BACKGROUND_COLOR};
         line-height: ${theme.TREENODE_LINE_HEIGHT};
         font-family: ${theme.TREENODE_FONT_FAMILY};
-        font-size: ${theme.TREENODE_FONT_SIZE};
+        font-size: ${theme.TREENODE_FONT_SIZE}px;
     }
-    tree-node .treeNodePreviewContainer {
+    granite-inspector-tree-node .treeNodePreviewContainer {
     }
-    tree-node .treeNodePlaceholder {
+    granite-inspector-tree-node .treeNodePlaceholder {
         white-space: pre;
         user-select: none;
-        font-size: ${theme.ARROW_FONT_SIZE};
-        margin-right: ${theme.ARROW_MARGIN_RIGHT};
+        font-size: ${theme.ARROW_FONT_SIZE}px
+        margin-right: ${theme.ARROW_MARGIN_RIGHT}px;
     }
-    tree-node .treeNodeChildNodesContainer {
+    granite-inspector-tree-node .treeNodeChildNodesContainer {
+        display: none;
         margin: 0;
-        padding-left: ${theme.TREENODE_PADDING_LEFT};
+        padding-left: ${theme.TREENODE_PADDING_LEFT}px;
+    }
+    granite-inspector-tree-node .treeNodeChildNodesContainer[expanded] {
+        display: block;
     }
 
 
-    object-name  {
+    granite-inspector-object-name  {
         color: ${theme.OBJECT_NAME_COLOR};
     }
-    object-name.dimmed {
+    granite-inspector-object-name.dimmed {
         opacity: 0.6;
     }
 
-    object-value .objectValueNull {
+    granite-inspector-object-value .objectValueNull {
         color: ${theme.OBJECT_VALUE_NULL_COLOR};
     }
-    object-value .objectValueUndefined {
+    granite-inspector-object-value .objectValueUndefined {
         color: ${theme.OBJECT_VALUE_UNDEFINED_COLOR};
     }
-    object-value .objectValueRegExp {
+    granite-inspector-object-value .objectValueRegExp {
         color: ${theme.OBJECT_VALUE_REGEXP_COLOR};
     }
-    object-value .objectValueString {
+    granite-inspector-object-value .objectValueString {
         color: ${theme.OBJECT_VALUE_STRING_COLOR};
     }
-    object-value .objectValueSymbol {
+    granite-inspector-object-value .objectValueSymbol {
         color: ${theme.OBJECT_VALUE_SYMBOL_COLOR};
     }
-    object-value .objectValueNumber {
+    granite-inspector-object-value .objectValueNumber {
         color: ${theme.OBJECT_VALUE_NUMBER_COLOR};
     }
-    object-value .objectValueBoolean {
+    granite-inspector-object-value .objectValueBoolean {
         color: ${theme.OBJECT_VALUE_BOOLEAN_COLOR};
     }
-    object-value .objectValueFunctionKeyword {
+    granite-inspector-object-value .objectValueFunctionKeyword {
         color: ${theme.OBJECT_VALUE_FUNCTION_KEYWORD_COLOR};
         font-style: italic;
     }
-    object-value .objectValueFunctionName {
+    granite-inspector-object-value .objectValueFunctionName {
         font-style: italic;
     }
 
@@ -120,7 +124,7 @@ const baseStyles = (theme) => {
         border: 1px solid ${theme.TABLE_BORDER_COLOR};
         color: ${theme.BASE_COLOR};
         font-family: ${theme.BASE_FONT_FAMILY};
-        font-size: ${theme.BASE_FONT_SIZE};
+        font-size: ${theme.BASE_FONT_SIZE}px;
     }
   
     table-inspector-header-container {
@@ -181,8 +185,8 @@ const baseStyles = (theme) => {
       border-collapse: separate;
       line-height: 120%;
       background-image: ${theme.TABLE_DATA_BACKGROUND_IMAGE};
-      background-size: ${theme.TABLE_DATA_BACKGROUND_SIZE};
-      font-size: ${theme.BASE_FONT_SIZE};
+      background-size: ${theme.TABLE_DATA_BACKGROUND_SIZE}px;
+      font-size: ${theme.BASE_FONT_SIZE}px;
     }
   
 
@@ -210,7 +214,7 @@ const baseStyles = (theme) => {
       text-overflow: ellipsis;
       overflow: hidden;
       line-height: 120%;
-      font-size: ${theme.BASE_FONT_SIZE};
+      font-size: ${theme.BASE_FONT_SIZE}px;
     }
   
     table-inspector-left-border.none {

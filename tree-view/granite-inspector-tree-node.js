@@ -21,18 +21,19 @@ class GraniteInspectorTreeNode extends LitElement {
       shouldShowPlaceholder,
   }) {
     let expandable = shouldShowArrow && childTreeNodes.length > 0;
+    console.error('GraniteInspectorTreeNode', expandable, shouldShowArrow, childTreeNodes.length)
     return html`
       <li aria-expanded$=${expanded} role="treeitem" class='treeNodeBase'>
         <div  path=${path} class="treeNodePreviewContainer clickableNode">
           ${expandable
-            ? html`<div class=".treeArrow" expanded?=${expanded}>▶</div>`
-            : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : ''}
+            ? html`<div class="treeArrow" expanded?=${expanded}>▶</div>`
+            : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : 'FUCK'}
           ${nodeRenderer(this)}
         </div>
-        <div >
+        <div>
           ${childTreeNodes.length > 0
             ? html`
-              <ol role="group" class="treeNodeChildNodesContainer">
+              <ol role="group" class="treeNodeChildNodesContainer"  expanded?=${expanded}>
                 ${childTreeNodes}
               </ol>`
             : ''}

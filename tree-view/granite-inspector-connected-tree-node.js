@@ -13,7 +13,10 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
     return this;
   }
 
-  _render({name, path, data, expanded, depth, dataIterator, nodeRenderer, nodeHasChildNodes, sortObjectKeys, expandedPaths}) {
+  _render({name, path, data,
+          expanded, depth, dataIterator,
+          nodeRenderer, showNonEnumerable,
+          sortObjectKeys, expandedPaths}) {
     return html`
       <granite-inspector-tree-node
             name=${name}
@@ -23,8 +26,8 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
             depth=${depth}
             childTreeNodes=${dataIterator ? this.generateChildren(data, path) : '' }
             nodeRenderer=${nodeRenderer}
-            shouldShowArrow=${nodeHasChildNodes}
-            showNonEnumerable=${this.showNonEnumerable}
+            shouldShowArrow=${this.hasChildNodes(data)}
+            showNonEnumerable=${showNonEnumerable}
             sortObjectKeys=${sortObjectKeys}
             shouldShowPlaceholder=${depth > 0} >                    
         </granite-inspector-tree-node>
@@ -62,7 +65,6 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
       isNotEnumerable: Boolean,
       expanded: Boolean,
       depth: Number,
-      nodeHasChildNodes: Boolean,
     };
   }
 
@@ -70,9 +72,16 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
     super.connectedCallback();
   }
 
+  hasChildNodes(parentData) {
+    if (!this.dataIterator) {
+      return false;
+    }
+    return this.dataIterator(parentData).next().done !== undefined;
+  }
+
   generateChildren(parentData, parentPath) {
     let childTreeNodes = [];
-    console.log('[GraniteInspectorConnectedTreeNode] generateChildren - this.dataIterator(parentData)', 
+    console.log('[GraniteInspectorConnectedTreeNode] generateChildren - this.dataIterator(parentData)',
         parentData, this.dataIterator(parentData).next());
     for (let item of this.dataIterator(parentData)) {
       console.log('[GraniteInspectorConnectedTreeNode] generateChildren - for', item);

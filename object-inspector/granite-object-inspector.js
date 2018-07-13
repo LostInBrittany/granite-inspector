@@ -1,6 +1,8 @@
 import { html, LitElement } from '@polymer/lit-element';
-import styles from './styles/createStyles';
-import './tree-view/granite-inspector-tree-view';
+import styles from '../styles/createStyles';
+import '../tree-view/granite-inspector-tree-view';
+import './granite-inspector-object-label';
+import './granite-inspector-object-root-label';
 
 const defaultNodeRenderer = ({ depth, name, data, isNonEnumerable }) => {
   return html`
@@ -42,7 +44,7 @@ class GraniteObjectInspector extends LitElement {
         expandPath=${expandPaths}
         showNonEnumerable=${showNonEnumerable}
         sortObjectKeys=${sortObjectKeys}
-        nodeRendered=${nodeRenderer}
+        nodeRenderer=${nodeRenderer}
         dataIterator=${dataIterator}></granite-inspector-tree-view>
     `;
   }
@@ -105,7 +107,7 @@ class GraniteObjectInspector extends LitElement {
     super.connectedCallback();
     this.createIterator();
     this.theme = this.theme || 'chromeLight';
-    this.data = (typeof this.data === 'string' ? JSON.parse(this.data) : this.data) || {} ;
+    this.data = (typeof this.data === 'string' ? JSON.parse(this.data) : this.data) || {};
     this.nodeRenderer = this.nodeRenderer || defaultNodeRenderer;
   }
 
@@ -153,8 +155,8 @@ class GraniteObjectInspector extends LitElement {
               data: propertyValue,
             };
           } else if (showNonEnumerable) {
-            // To work around the error (happens some time when propertyName === 'caller' || 
-            // propertyName === 'arguments') 'caller' and 'arguments' are restricted function 
+            // To work around the error (happens some time when propertyName === 'caller' ||
+            // propertyName === 'arguments') 'caller' and 'arguments' are restricted function
             // properties and cannot be accessed in this context
             // http://stackoverflow.com/questions/31921189/caller-and-arguments-are-restricted-function-properties-and-cannot-be-access
             let propertyValue;

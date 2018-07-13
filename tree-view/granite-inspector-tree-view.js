@@ -98,6 +98,7 @@ class GraniteInspectorTreeView extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.getExpandedPaths();
+    console.log('[granite-inspector-tree-view] connectedCallback - nodeRenderer', this.nodeRenderer);
   }
 
   hasChildNodes(data) {
