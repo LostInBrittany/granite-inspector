@@ -3,6 +3,9 @@ import * as themes from './themes';
 
 const baseStyles = (theme) => {
     return `
+    .clickableNode {
+        cursor: pointer;
+    }
     dom-node-preview .htmlOpenTag {
         color: ${theme.HTML_TAG_COLOR}
     }
@@ -34,7 +37,21 @@ const baseStyles = (theme) => {
       color: ${theme.HTML_DOCTYPE_COLOR};
     }
   
-    tree-node {
+    granite-inspector-tree-node .treeArrow {
+      display: inline-block;
+      user-select: none;
+      font-size: ${theme.ARROW_FONT_SIZE}px;
+      margin-right: ${theme.ARROW_MARGIN_RIGHT}px;
+      color: ${theme.ARROW_COLOR};
+    }
+
+    granite-inspector-tree-node .treeArrow[expanded] {
+      --webkit-transform: rotateZ(90deg);
+      --moz-transform: rotateZ(90deg);
+      transform: rotateZ(90deg);
+    }
+    
+    granite-inspector-tree-node .treeNodeBase {
         cursor: default;
         box-sizing: border-box;
         list-style: none;
@@ -51,23 +68,6 @@ const baseStyles = (theme) => {
         user-select: none;
         font-size: ${theme.ARROW_FONT_SIZE};
         margin-right: ${theme.ARROW_MARGIN_RIGHT};
-    }
-    tree-node .treeNodeArrow {
-        display: inline-block;
-        user-select: none;
-        font-size: ${theme.ARROW_FONT_SIZE};
-        margin-right: ${theme.ARROW_MARGIN_RIGHT};
-        color: ${theme.ARROW_COLOR};
-    }
-    tree-node .treeNodeArrow.expanded {
-        --webkit-transform: rotateZ(90deg);
-        --moz-transform: rotateZ(90deg);
-        transform: rotateZ(90deg);
-    }
-    tree-node .treeNodeArrow.collapsed {
-        --webkit-transform: rotateZ(0deg);
-        --moz-transform: rotateZ(0deg);
-        transform: rotateZ(0deg);
     }
     tree-node .treeNodeChildNodesContainer {
         margin: 0;
