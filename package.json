@@ -1,0 +1,19 @@
+{
+  "name": "@granite-elements/granite-inspector",
+  "description": "A lit-element based version of react-inspector",
+  "homepage": "https://github.com/LostInBrittany/granite-inspector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LostInBrittany/granite-inspector"
+  },
+  "main": "granite-inspector.js",
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.2",
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  }
+}
