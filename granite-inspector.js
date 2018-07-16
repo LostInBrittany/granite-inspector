@@ -2,7 +2,8 @@ import {html, LitElement} from '@polymer/lit-element';
 
 import styles from './styles/createStyles';
 
-console.dir(styles)
+import './tree-view/granite-inspector-arrow';
+
 /**
  * `granite-inspector`
  * A lit-element based version of react-inspector
@@ -17,7 +18,10 @@ class GraniteInspector extends LitElement {
       <style>
         ${styles['chromeLight']}
       </style>
-      <h2>Hello [[prop1]]!</h2>
+      <h2>Hello inspector!</h2>
+      <granite-inspector-arrow></granite-inspector-arrow>
+      <granite-inspector-arrow expanded></granite-inspector-arrow>
+      <granite-inspector-arrow expanded="true"></granite-inspector-arrow>
     `;
   }
   static get properties() {

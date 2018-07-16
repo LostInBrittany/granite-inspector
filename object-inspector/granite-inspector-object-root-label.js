@@ -1,6 +1,7 @@
 import { html, LitElement } from '@polymer/lit-element';
 
 import './granite-inspector-object-name';
+import './granite-inspector-object-preview';
 
 class GraniteInspectorObjectRootLabel extends LitElement {
   /**
