@@ -20,15 +20,16 @@ class GraniteInspectorObjectValue extends LitElement {
     return this;
   }
 
-  _render({ data }) {
+  _render({ data, closed }) {
     return html`
-      ${this.markup(data)}
+      ${this.markup(data, closed)}
     `;
   }
 
   static get properties() {
     return {
       data: Object,
+      closed: Boolean,
     };
   }
 
@@ -36,39 +37,71 @@ class GraniteInspectorObjectValue extends LitElement {
   markup() {
     switch (typeof this.data) {
       case 'number':
-        return html`<span class='objectValueNumber'>${this.data}</span>`;
+        return html`<div class='objectValueNumber'>${this.data}</div>`;
       case 'string':
-        return html`<span class='objectValueString'>"${this.data}"</span>`;
+        return html`<div class='objectValueString'>"${this.data}"</div>`;
       case 'boolean':
-        return html`<span class='objectValueBoolean'>${String(this.data)}</span>`;
+        return html`<div class='objectValueBoolean'>${String(this.data)}</div>`;
       case 'undefined':
-        return html`<span class='objectValueUndefined'>undefined</span>`;
+        return html`<div class='objectValueUndefined'>undefined</div>`;
       case 'object':
         if (this.data === null) {
-          return html`<span class='objectValueNull'>null</span>`;
+          return html`<div class='objectValueNull'>null</div>`;
         }
         if (this.data instanceof Date) {
-          return html`<span>${this.data.toString()}</span>`;
+          return html`<div>${this.data.toString()}</div>`;
         }
         if (this.data instanceof RegExp) {
-          return html`<span class='objectValueRegExp'>${this.data.toString()}</span>`;
+          return html`<div class='objectValueRegExp'>${this.data.toString()}</div>`;
         }
         if (this.data instanceof Array) {
-          return html`<span>${`Array[${this.data.length}]`}</span>`;
+          return html`<div>${`Array[${this.data.length}]`}</div>`;
         }
-        return html`<span>${this.data.constructor.name}</span>`;
+        if (this.data.constructor.name == 'Object') {
+          if (this.closed) {
+            return html`<div>{…}</div>`;
+          }
+          return this._renderObject(this.data);
+        }
+        return html`<div>${this.data.constructor.name}</div>`;
       case 'function':
         return html`
-          <span>
-            <span class='objectValueFunctionKeyword'>function</span>
-            <span class='objectValueFunctionName'>&nbsp;${this.data.name}()</span>
-          </span>
+          <div>
+            <div class='objectValueFunctionKeyword'>function</div>
+            <div class='objectValueFunctionName'>&nbsp;${this.data.name}()</div>
+          </div>
         `;
       case 'symbol':
-        return html`<span class='objectValueSymbol'>${this.data.toString()}</span>`;
+        return html`<div class='objectValueSymbol'>${this.data.toString()}</div>`;
       default:
-        return `<span />`;
+        return `<div />`;
     }
+  }
+
+  _renderObject(object) {
+    let propertyNodes = [];
+    for (let propertyName in object) {
+      if (Object.prototype.hasOwnProperty.call(object, propertyName)) {
+        const propertyValue = object[propertyName];
+        let ellipsis = '';
+        if (propertyNodes.length === this.maxProperties - 1 &&
+            Object.keys(object).length > this.maxProperties) {
+          ellipsis = html`<div>…</div>`;
+        }
+        propertyNodes.push(html`
+        <div>
+          <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>:&nbsp;
+          <granite-inspector-object-value data=${propertyValue} closed></granite-inspector-object-value>
+          ${ellipsis}
+        </div>`);
+        if (ellipsis != '') break;
+      }
+    }
+    return html`
+    <div>
+      {${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}}
+    </div>
+  `;
   }
 }
 

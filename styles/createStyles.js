@@ -24,7 +24,7 @@ const baseStyles = (theme) => {
     }
     dom-node-preview .htmlCloseTag.offsetLeft {
         /* hack: offset placeholder */
-        margin-left: -${theme.TREENODE_PADDING_LEFT}px;
+        margin-left: -${theme.TREENODE_PADDING_LEFT};
     }
     dom-node-preview .htmlCloseTag.tagName {
         color: ${theme.HTML_TAGNAME_COLOR};
@@ -37,11 +37,21 @@ const baseStyles = (theme) => {
       color: ${theme.HTML_DOCTYPE_COLOR};
     }
   
+    granite-object-inspector,
+    granite-inspector-tree-view,
+    granite-inspector-tree-node, 
+    granite-inspector-connected-tree-node,
+    granite-inspector-object-name,
+    granite-inspector-object-value,
+    granite-inspector-object-preview {
+        display: flex;
+    }
+
     granite-inspector-tree-node .treeArrow {
       display: inline-block;
       user-select: none;
-      font-size: ${theme.ARROW_FONT_SIZE}px;px;
-      margin-right: ${theme.ARROW_MARGIN_RIGHT}px;
+      font-size: ${theme.ARROW_FONT_SIZE};
+      margin-right: ${theme.ARROW_MARGIN_RIGHT};
       color: ${theme.ARROW_COLOR};
     }
 
@@ -59,20 +69,22 @@ const baseStyles = (theme) => {
         background-color: ${theme.BASE_BACKGROUND_COLOR};
         line-height: ${theme.TREENODE_LINE_HEIGHT};
         font-family: ${theme.TREENODE_FONT_FAMILY};
-        font-size: ${theme.TREENODE_FONT_SIZE}px;
+        font-size: ${theme.TREENODE_FONT_SIZE};
     }
     granite-inspector-tree-node .treeNodePreviewContainer {
+        display: flex;
+        flex-flow: row wrap;
     }
     granite-inspector-tree-node .treeNodePlaceholder {
         white-space: pre;
         user-select: none;
-        font-size: ${theme.ARROW_FONT_SIZE}px
-        margin-right: ${theme.ARROW_MARGIN_RIGHT}px;
+        font-size: ${theme.ARROW_FONT_SIZE}
+        margin-right: ${theme.ARROW_MARGIN_RIGHT};
     }
     granite-inspector-tree-node .treeNodeChildNodesContainer {
         display: none;
         margin: 0;
-        padding-left: ${theme.TREENODE_PADDING_LEFT}px;
+        padding-left: ${theme.TREENODE_PADDING_LEFT};
     }
     granite-inspector-tree-node .treeNodeChildNodesContainer[expanded] {
         display: block;
@@ -85,7 +97,14 @@ const baseStyles = (theme) => {
     granite-inspector-object-name.dimmed {
         opacity: 0.6;
     }
-
+    granite-inspector-object-value  div {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    granite-inspector-object-preview > div {
+        display: flex;
+        flex-flow: row wrap;
+    }
     granite-inspector-object-value .objectValueNull {
         color: ${theme.OBJECT_VALUE_NULL_COLOR};
     }
@@ -115,6 +134,10 @@ const baseStyles = (theme) => {
         font-style: italic;
     }
 
+    granite-inspector-object-label div {
+        display: flex;
+        flex-flow: row wrap;
+    }
 
     table-inspector  {
         line-height: 120%;
@@ -124,7 +147,7 @@ const baseStyles = (theme) => {
         border: 1px solid ${theme.TABLE_BORDER_COLOR};
         color: ${theme.BASE_COLOR};
         font-family: ${theme.BASE_FONT_FAMILY};
-        font-size: ${theme.BASE_FONT_SIZE}px;
+        font-size: ${theme.BASE_FONT_SIZE};
     }
   
     table-inspector-header-container {
@@ -185,8 +208,8 @@ const baseStyles = (theme) => {
       border-collapse: separate;
       line-height: 120%;
       background-image: ${theme.TABLE_DATA_BACKGROUND_IMAGE};
-      background-size: ${theme.TABLE_DATA_BACKGROUND_SIZE}px;
-      font-size: ${theme.BASE_FONT_SIZE}px;
+      background-size: ${theme.TABLE_DATA_BACKGROUND_SIZE};
+      font-size: ${theme.BASE_FONT_SIZE};
     }
   
 
@@ -214,7 +237,7 @@ const baseStyles = (theme) => {
       text-overflow: ellipsis;
       overflow: hidden;
       line-height: 120%;
-      font-size: ${theme.BASE_FONT_SIZE}px;
+      font-size: ${theme.BASE_FONT_SIZE};
     }
   
     table-inspector-left-border.none {

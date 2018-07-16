@@ -13,7 +13,7 @@
       import '@polymer/iron-demo-helpers/demo-snippet';
     </script>
 
-    <script type="module" src="../object-inspector/granite-object-inspector.js"></script>
+    <script type="module" src="../granite-inspector.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -25,7 +25,7 @@
       <h3>Basic granite-inspector demo</h3>
       <demo-snippet>
         <template>
-          <granite-object-inspector data='["a", "b", { "c": "d", "e": "f"}]'></granite-object-inspector>
+          <granite-inspector data='["a", "b", { "c": "d", "e": "f", "g": { "h": "i", "j": "k"}}]'></granite-inspector>
         </template>
       </demo-snippet>
     </div>

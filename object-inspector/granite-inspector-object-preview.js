@@ -53,19 +53,20 @@ class GraniteInspectorObjectPreview extends LitElement {
 
     if (this.data instanceof Array) {
       return html`
-        <span>
+        <div>
           (${this.data.length}) [
-          ${html`${
-            this.data.map((element, i) => {
-              return html`
-                <granite-inspector-object-value data=${element}></granite-inspector-object-value> 
-                ${i<this.data.length-1 ? `,` : ``}
-              `;
-            })
-          }`}]
-        </span>
+            ${html`${
+              this.data.map((element, i) => {
+                return html`
+                  <granite-inspector-object-value data=${element}></granite-inspector-object-value> 
+                  ${i<this.data.length-1 ? html`,&nbsp;` : ``}
+                `;
+              })
+            }`}
+          ]
+        </div>
       `;
-    } else if (typeof object === 'string') {
+    } else if (typeof this.data === 'string') {
       return html`<granite-inspector-object-value data='${this.data}' ></granite-inspector-object-value>`;
     } else {
       let propertyNodes = [];
@@ -75,22 +76,23 @@ class GraniteInspectorObjectPreview extends LitElement {
           let ellipsis = '';
           if (propertyNodes.length === this.maxProperties - 1 &&
               Object.keys(this.data).length > this.maxProperties) {
-            ellipsis = html`<span>…</span>`;
+            ellipsis = html`<div>…</div>`;
           }
           propertyNodes.push(html`
-          <span>
+          <div>
             <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>:&nbsp;
             <granite-inspector-object-value data=${propertyValue}></granite-inspector-object-value>
             ${ellipsis}
-          </span>`);
+          </div>`);
           if (ellipsis != '') break;
         }
       }
 
       return html`
-        <span>
-          ${`${this.data.constructor.name} {`} ${propertyNodes.join(', ')} ${'}'}
-        </span>
+        <div>
+          ${this.data.constructor.name} 
+          { ${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)} } 
+        </div>
       `;
     }
   }

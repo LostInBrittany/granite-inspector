@@ -17,7 +17,7 @@ const defaultNodeRenderer = ({ depth, name, data, isNonEnumerable }) => {
 };
 
 
-class GraniteObjectInspector extends LitElement {
+class GraniteInspectorObject extends LitElement {
   /**
    * We don't want Shadow DOM for this element
    * See https://github.com/Polymer/lit-element/issues/42
@@ -192,4 +192,4 @@ class GraniteObjectInspector extends LitElement {
   }
 }
 
-window.customElements.define('granite-object-inspector', GraniteObjectInspector);
+window.customElements.define('granite-inspector-object', GraniteInspectorObject);

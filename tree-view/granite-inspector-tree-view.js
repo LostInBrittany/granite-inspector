@@ -13,12 +13,11 @@ class GraniteInspectorTreeView extends LitElement {
     return this;
   }
 
-  _render({data, name, theme, dataIterator, sortObjectKeys, showNonEnumerable, nodeRenderer, expandedPaths}) {
+  _render({data, name, dataIterator, sortObjectKeys, showNonEnumerable, nodeRenderer, expandedPaths}) {
     return html`
     <granite-inspector-connected-tree-node
         name=${name}
         data=${data}
-        theme=${theme}
         depth=0
         path=${this.DEFAULT_ROOT_PATH}
         showNonEnumerable=${showNonEnumerable}
@@ -39,10 +38,6 @@ class GraniteInspectorTreeView extends LitElement {
        * Specify the optional name of the root node, default to undefined
        */
       name: String,
-      /**
-       * The theme, defaults to chromeLight
-       */
-      theme: String,
       /**
        * An integer specifying to which level the tree should be initially expanded
        */
