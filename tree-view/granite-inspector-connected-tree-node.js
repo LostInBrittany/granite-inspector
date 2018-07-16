@@ -81,10 +81,7 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
 
   generateChildren(parentData, parentPath) {
     let childTreeNodes = [];
-    console.log('[GraniteInspectorConnectedTreeNode] generateChildren - this.dataIterator(parentData)',
-        parentData, this.dataIterator(parentData).next());
     for (let item of this.dataIterator(parentData)) {
-      console.log('[GraniteInspectorConnectedTreeNode] generateChildren - for', item);
       let { name, data, isNonEnumerable } = item;
       const key = name;
       const path = `${parentPath}.${key}`;
@@ -101,7 +98,6 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
             nodeRenderer=${this.nodeRenderer}></granite-inspector-connected-tree-node>`
       );
     }
-    console.log('[GraniteInspectorConnectedTreeNode] generateChildren', childTreeNodes);
     return childTreeNodes;
   }
 }

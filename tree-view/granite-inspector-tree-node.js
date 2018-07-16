@@ -21,9 +21,10 @@ class GraniteInspectorTreeNode extends LitElement {
       shouldShowPlaceholder,
   }) {
     let expandable = shouldShowArrow && childTreeNodes.length > 0;
-    console.error('GraniteInspectorTreeNode', expandable, shouldShowArrow, childTreeNodes.length)
     return html`
-      <li aria-expanded$=${expanded} role="treeitem" class='treeNodeBase'>
+      <li aria-expanded$=${expanded} 
+          role="treeitem" class='treeNodeBase' 
+          on-click="${() => this.expanded = !expanded}">
         <div  path=${path} class="treeNodePreviewContainer clickableNode">
           ${expandable
             ? html`<div class="treeArrow" expanded?=${expanded}>▶</div>`
@@ -95,6 +96,10 @@ class GraniteInspectorTreeNode extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  toggleExpand() {
+    this.expanded = !this.expanded;
   }
 }
 
