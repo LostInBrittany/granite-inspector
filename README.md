@@ -6,7 +6,7 @@ A custom element, [lit-element](https://github.com/Polymer/lit-element) based, v
 Power of [Browser DevTools](https://developers.google.com/web/tools/chrome-devtools/) inspectors right as a custom element.
 
 > ## 🛠 Status: In Development
-> `granite-inspector` is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
+> `granite-inspector` is currently in development. We encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 
 
 [![Published on npm](https://img.shields.io/npm/v/@granite-elements/granite-inspector.svg)](https://www.npmjs.com/package/@granite-elements/granite-inspector)
