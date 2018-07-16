@@ -1,5 +1,6 @@
 import { html, LitElement } from '@polymer/lit-element';
 import styles from '../styles/createStyles';
+import createIterator from '../tools/createIterator';
 import '../tree-view/granite-inspector-tree-view';
 import './granite-inspector-object-label';
 import './granite-inspector-object-root-label';
@@ -7,14 +8,15 @@ import './granite-inspector-object-root-label';
 const defaultNodeRenderer = ({ depth, name, data, isNonEnumerable }) => {
   return html`
     ${depth === 0 ?
-      html`<granite-inspector-object-root-label 
-          name=${name} data=${data}></granite-inspector-object-root-label>` :
+      html`<granite-inspector-object-root-label name=${name} data=${data}></granite-inspector-object-root-label>` :
       html`
-        <granite-inspector-object-label 
-            name=${name} data=${data} isNonEnumerable=${isNonEnumerable}></granite-inspector-object-label>`
+      <granite-inspector-object-label name=${name} data=${data} isNonEnumerable=${isNonEnumerable}>        
+      </granite-inspector-object-label>
+      `
     }
   `;
 };
+
 
 
 class GraniteInspectorObject extends LitElement {
@@ -29,8 +31,8 @@ class GraniteInspectorObject extends LitElement {
   }
 
   _render({ data, name, theme,
-            expandLevel, expandPaths, sortObjectKeys,
-            showNonEnumerable, nodeRenderer, dataIterator }) {
+    expandLevel, expandPaths, sortObjectKeys,
+    showNonEnumerable, nodeRenderer, dataIterator }) {
     return html`
       <style>
         ${styles[theme]}
@@ -105,90 +107,10 @@ class GraniteInspectorObject extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.createIterator();
+    this.dataIterator = createIterator(this.sortObjectKeys, this.showNonEnumerable);
     this.theme = this.theme || 'chromeLight';
     this.data = (typeof this.data === 'string' ? JSON.parse(this.data) : this.data) || {};
     this.nodeRenderer = this.nodeRenderer || defaultNodeRenderer;
-  }
-
-
-  createIterator() {
-    let sortObjectKeys = this.sortObjectKeys;
-    let showNonEnumerable = this.showNonEnumerable;
-    const objectIterator = function* (data) {
-      const shouldIterate = (typeof data === 'object' && data !== null) || typeof data === 'function';
-      if (!shouldIterate) {
-        return;
-      }
-
-      // iterable objects (except arrays)
-      if (Array.isArray(data)) {
-        let i = 0;
-        for (let entry of data) {
-          if (Array.isArray(entry) && entry.length === 2) {
-            const [k, v] = entry;
-            yield {
-              name: k,
-              data: v,
-            };
-          } else {
-            yield {
-              name: i.toString(),
-              data: entry,
-            };
-          }
-          i++;
-        }
-      } else {
-        const keys = Object.getOwnPropertyNames(data);
-        if (sortObjectKeys === true) {
-          keys.sort();
-        } else if (typeof sortObjectKeys === 'function') {
-          keys.sort(sortObjectKeys);
-        }
-
-        for (let propertyName of keys) {
-          if (data.propertyIsEnumerable(propertyName)) {
-            const propertyValue = data[propertyName];
-            yield {
-              name: propertyName || `""`,
-              data: propertyValue,
-            };
-          } else if (showNonEnumerable) {
-            // To work around the error (happens some time when propertyName === 'caller' ||
-            // propertyName === 'arguments') 'caller' and 'arguments' are restricted function
-            // properties and cannot be accessed in this context
-            // http://stackoverflow.com/questions/31921189/caller-and-arguments-are-restricted-function-properties-and-cannot-be-access
-            let propertyValue;
-            try {
-              propertyValue = data[propertyName];
-            } catch (e) {
-              // console.warn(e)
-            }
-
-            if (propertyValue !== undefined) {
-              yield {
-                name: propertyName,
-                data: propertyValue,
-                isNonenumerable: true,
-              };
-            }
-          }
-        }
-
-        // [[Prototype]] of the object: `Object.getPrototypeOf(data)`
-        // the property name is shown as "__proto__"
-        if (showNonEnumerable && data !== Object.prototype /* already added */) {
-          yield {
-            name: '__proto__',
-            data: Object.getPrototypeOf(data),
-            isNonEnumerable: true,
-          };
-        }
-      }
-    };
-
-    this.dataIterator = objectIterator;
   }
 }
 
