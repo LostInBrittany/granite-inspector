@@ -18,7 +18,6 @@ const defaultNodeRenderer = ({ depth, name, data, isNonEnumerable }) => {
 };
 
 
-
 class GraniteInspectorObject extends LitElement {
   /**
    * We don't want Shadow DOM for this element

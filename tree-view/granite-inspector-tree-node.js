@@ -28,7 +28,7 @@ class GraniteInspectorTreeNode extends LitElement {
         <div  path=${path} class="treeNodePreviewContainer clickableNode">
           ${expandable
             ? html`<div class="treeArrow" expanded?=${expanded}>▶</div>`
-            : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : 'FUCK'}
+            : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : ''}
           ${nodeRenderer(this)}
         </div>
         <div>
