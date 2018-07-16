@@ -41,8 +41,8 @@ class GraniteInspectorObjectPreview extends LitElement {
     super();
     this.maxProperties = 3;
   }
-  
-    
+
+
   markup() {
     if (typeof this.data !== 'object' ||
         this.data === null ||

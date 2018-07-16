@@ -24,7 +24,7 @@ class GraniteInspectorTreeNode extends LitElement {
     return html`
       <li aria-expanded$=${expanded} 
           role="treeitem" class='treeNodeBase' 
-          on-click="${() => this.expanded = !expanded}">
+          on-click="${(evt) => this.toggleExpand(evt)}">
         <div  path=${path} class="treeNodePreviewContainer clickableNode">
           ${expandable
             ? html`<div class="treeArrow" expanded?=${expanded}>▶</div>`
@@ -98,7 +98,8 @@ class GraniteInspectorTreeNode extends LitElement {
     super.connectedCallback();
   }
 
-  toggleExpand() {
+  toggleExpand(evt) {
+    evt.stopPropagation();
     this.expanded = !this.expanded;
   }
 }

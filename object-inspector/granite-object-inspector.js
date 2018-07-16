@@ -122,7 +122,7 @@ class GraniteObjectInspector extends LitElement {
       }
 
       // iterable objects (except arrays)
-      if (!Array.isArray(data)) {
+      if (Array.isArray(data)) {
         let i = 0;
         for (let entry of data) {
           if (Array.isArray(entry) && entry.length === 2) {
