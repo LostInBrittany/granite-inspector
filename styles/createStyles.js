@@ -268,3 +268,5 @@ const styles = Object.keys(themes)
         return styles;
     }, {});
 export default styles;
+
+export { baseStyles as createStyles };
