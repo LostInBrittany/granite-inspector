@@ -20,7 +20,7 @@ class GraniteInspectorObjectLabel extends LitElement {
         <granite-inspector-object-name 
             name=${name} 
             dimmed=${isNonEnumerable}></granite-inspector-object-name>
-        <div>: </div>
+        <div>:&nbsp;</div>
         <granite-inspector-object-value 
             data=${data}></granite-inspector-object-value>
       </div>

@@ -82,6 +82,7 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
   generateChildren(parentData, parentPath) {
     let childTreeNodes = [];
     for (let item of this.dataIterator(parentData)) {
+      console.error('ITEM', item);
       let { name, data, isNonEnumerable } = item;
       const key = name;
       const path = `${parentPath}.${key}`;

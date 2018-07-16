@@ -101,7 +101,7 @@ const baseStyles = (theme) => {
         display: flex;
         flex-flow: row wrap;
     }
-    granite-inspector-object-preview > div {
+    granite-inspector-object-preview div {
         display: flex;
         flex-flow: row wrap;
     }

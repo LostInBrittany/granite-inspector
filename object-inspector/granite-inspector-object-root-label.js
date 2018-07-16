@@ -20,7 +20,7 @@ class GraniteInspectorObjectRootLabel extends LitElement {
         <span>
           <granite-inspector-object-name 
               name=${name}></granite-inspector-object-name>
-          <span>: </span>
+          <span>:&nbsp;</span>
           <granite-inspector-object-preview 
               data=${data}></granite-inspector-object-preview>
         </span>

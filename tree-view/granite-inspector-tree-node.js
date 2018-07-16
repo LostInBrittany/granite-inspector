@@ -13,6 +13,7 @@ class GraniteInspectorTreeNode extends LitElement {
   }
 
   _render({
+      data,
       path,
       expanded,
       childTreeNodes,
@@ -21,6 +22,7 @@ class GraniteInspectorTreeNode extends LitElement {
       shouldShowPlaceholder,
   }) {
     let expandable = shouldShowArrow && childTreeNodes.length > 0;
+    console.error(nodeRenderer(this));
     return html`
       <li aria-expanded$=${expanded} 
           role="treeitem" class='treeNodeBase' 

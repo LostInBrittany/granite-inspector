@@ -97,7 +97,7 @@ class GraniteInspectorTreeView extends LitElement {
   }
 
   hasChildNodes(data) {
-    return !this.dataIterator(data).next().done;
+    return this.dataIterator && !this.dataIterator(data).next().done;
   }
 
 

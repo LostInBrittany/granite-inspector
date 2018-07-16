@@ -97,6 +97,9 @@ class GraniteInspectorObjectValue extends LitElement {
         if (ellipsis != '') break;
       }
     }
+    if (propertyNodes.length == 0) {
+      return html`${this.data.constructor.name} {}`;
+    }
     return html`
     <div>
       {${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}}

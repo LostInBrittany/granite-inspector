@@ -48,13 +48,13 @@ class GraniteInspectorObjectPreview extends LitElement {
         this.data === null ||
         this.data instanceof Date ||
         this.data instanceof RegExp) {
-      return html`<granite-inspector-object-value data=${this._data}></granite-inspector-object-value>`;
+      return html`<granite-inspector-object-value data=${this.data}></granite-inspector-object-value>`;
     }
 
     if (this.data instanceof Array) {
       return html`
         <div>
-          (${this.data.length}) [
+          (${this.data.length}) [&nbsp;
             ${html`${
               this.data.map((element, i) => {
                 return html`
@@ -63,7 +63,7 @@ class GraniteInspectorObjectPreview extends LitElement {
                 `;
               })
             }`}
-          ]
+          &nbsp;]
         </div>
       `;
     } else if (typeof this.data === 'string') {
@@ -87,11 +87,13 @@ class GraniteInspectorObjectPreview extends LitElement {
           if (ellipsis != '') break;
         }
       }
-
+      if (propertyNodes.length == 0) {
+        return html`${this.data.constructor.name} {}`;
+      }
       return html`
         <div>
           ${this.data.constructor.name} 
-          { ${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)} } 
+          {&nbsp;${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}&nbsp;} 
         </div>
       `;
     }

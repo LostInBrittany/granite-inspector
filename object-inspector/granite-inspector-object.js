@@ -1,21 +1,12 @@
 import { html, LitElement } from '@polymer/lit-element';
 import styles from '../styles/createStyles';
 import createIterator from '../tools/createIterator';
+import defaultNodeRenderer from '../tools/defaultNodeRenderer';
 import '../tree-view/granite-inspector-tree-view';
 import './granite-inspector-object-label';
 import './granite-inspector-object-root-label';
 
-const defaultNodeRenderer = ({ depth, name, data, isNonEnumerable }) => {
-  return html`
-    ${depth === 0 ?
-      html`<granite-inspector-object-root-label name=${name} data=${data}></granite-inspector-object-root-label>` :
-      html`
-      <granite-inspector-object-label name=${name} data=${data} isNonEnumerable=${isNonEnumerable}>        
-      </granite-inspector-object-label>
-      `
-    }
-  `;
-};
+
 
 
 class GraniteInspectorObject extends LitElement {
