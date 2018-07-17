@@ -52,19 +52,19 @@ class GraniteInspectorObjectPreview extends LitElement {
     }
 
     if (this.data instanceof Array) {
-      return html`
-        <div>
-          (${this.data.length}) [&nbsp;
-            ${html`${
+      return html`        
+          <span>(${this.data.length}) [</span>
+          ${
+            html`${
               this.data.map((element, i) => {
                 return html`
-                  <granite-inspector-object-value data=${element}></granite-inspector-object-value> 
-                  ${i<this.data.length-1 ? html`,&nbsp;` : ``}
+                  <granite-inspector-object-value data=${element}></granite-inspector-object-value>
+                  ${i<this.data.length-1 ? html`<span>,&nbsp;</span>` : ``}
                 `;
               })
-            }`}
-          &nbsp;]
-        </div>
+            }`
+          }
+          ]
       `;
     } else if (typeof this.data === 'string') {
       return html`<granite-inspector-object-value data='${this.data}' ></granite-inspector-object-value>`;
@@ -76,14 +76,12 @@ class GraniteInspectorObjectPreview extends LitElement {
           let ellipsis = '';
           if (propertyNodes.length === this.maxProperties - 1 &&
               Object.keys(this.data).length > this.maxProperties) {
-            ellipsis = html`<div>…</div>`;
+            ellipsis = html`<span>…</span>`;
           }
           propertyNodes.push(html`
-          <div>
             <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>:&nbsp;
             <granite-inspector-object-value data=${propertyValue}></granite-inspector-object-value>
-            ${ellipsis}
-          </div>`);
+            ${ellipsis}`);
           if (ellipsis != '') break;
         }
       }
@@ -91,10 +89,10 @@ class GraniteInspectorObjectPreview extends LitElement {
         return html`${this.data.constructor.name} {}`;
       }
       return html`
-        <div>
+        <span>
           ${this.data.constructor.name} 
-          {&nbsp;${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}&nbsp;} 
-        </div>
+          {${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}} 
+        </span>
       `;
     }
   }

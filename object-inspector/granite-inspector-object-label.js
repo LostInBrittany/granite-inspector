@@ -16,14 +16,12 @@ class GraniteInspectorObjectLabel extends LitElement {
 
   _render({name, data, isNonEnumerable}) {
     return html`
-      <div>
-        <granite-inspector-object-name 
-            name=${name} 
-            dimmed=${isNonEnumerable}></granite-inspector-object-name>
-        <div>:&nbsp;</div>
-        <granite-inspector-object-value 
-            data=${data}></granite-inspector-object-value>
-      </div>
+      <granite-inspector-object-name 
+          name=${name} 
+          dimmed=${isNonEnumerable}></granite-inspector-object-name>
+      <span>:&nbsp;</span>
+      <granite-inspector-object-value 
+          data=${data}></granite-inspector-object-value>
     `;
   }
 

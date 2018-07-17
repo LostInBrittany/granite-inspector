@@ -17,13 +17,11 @@ class GraniteInspectorObjectRootLabel extends LitElement {
   _render({name, data}) {
     if (typeof name === 'string') {
       return html`
-        <span>
-          <granite-inspector-object-name 
-              name=${name}></granite-inspector-object-name>
-          <span>:&nbsp;</span>
-          <granite-inspector-object-preview 
-              data=${data}></granite-inspector-object-preview>
-        </span>
+        <granite-inspector-object-name 
+            name=${name}></granite-inspector-object-name>
+        <span>:&nbsp;</span>
+        <granite-inspector-object-preview 
+            data=${data}></granite-inspector-object-preview>
       `;
     } else {
       return html`

@@ -1,7 +1,7 @@
 const theme = {
-  BASE_FONT_FAMILY: 'Menlo, monospace',
-  BASE_FONT_SIZE: '11px',
-  BASE_LINE_HEIGHT: '14px',
+  BASE_FONT_FAMILY: 'monospace',
+  BASE_FONT_SIZE: '13px',
+  BASE_LINE_HEIGHT: '16px',
 
   BASE_BACKGROUND_COLOR: 'white',
   BASE_COLOR: 'black',
@@ -28,8 +28,8 @@ const theme = {
   ARROW_MARGIN_RIGHT: '3px',
   ARROW_FONT_SIZE: '12px',
 
-  TREENODE_FONT_FAMILY: 'Menlo, monospace',
-  TREENODE_FONT_SIZE: '12px',
+  TREENODE_FONT_FAMILY: 'monospace',
+  TREENODE_FONT_SIZE: '13px',
   TREENODE_LINE_HEIGHT: '16px',
   TREENODE_PADDING_LEFT: '12px',
 

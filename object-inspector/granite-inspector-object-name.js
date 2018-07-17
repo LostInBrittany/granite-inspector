@@ -21,9 +21,7 @@ class GraniteInspectorObjectName extends LitElement {
   }
 
   _render({name, dimmed}) {
-    return html`
-      <div dimmed$=${dimmed}>${name}</div>
-    `;
+    return html`<span dimmed$=${dimmed}>${name}</span>`;
   }
 
   static get properties() {

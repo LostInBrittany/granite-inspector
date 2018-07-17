@@ -37,16 +37,6 @@ const baseStyles = (theme) => {
       color: ${theme.HTML_DOCTYPE_COLOR};
     }
   
-    granite-object-inspector,
-    granite-inspector-tree-view,
-    granite-inspector-tree-node, 
-    granite-inspector-connected-tree-node,
-    granite-inspector-object-name,
-    granite-inspector-object-value,
-    granite-inspector-object-preview {
-        display: flex;
-    }
-
     granite-inspector-tree-node .treeArrow {
       display: inline-block;
       user-select: none;
@@ -72,8 +62,6 @@ const baseStyles = (theme) => {
         font-size: ${theme.TREENODE_FONT_SIZE};
     }
     granite-inspector-tree-node .treeNodePreviewContainer {
-        display: flex;
-        flex-flow: row wrap;
     }
     granite-inspector-tree-node .treeNodePlaceholder {
         white-space: pre;
@@ -96,14 +84,6 @@ const baseStyles = (theme) => {
     }
     granite-inspector-object-name.dimmed {
         opacity: 0.6;
-    }
-    granite-inspector-object-value  div {
-        display: flex;
-        flex-flow: row wrap;
-    }
-    granite-inspector-object-preview div {
-        display: flex;
-        flex-flow: row wrap;
     }
     granite-inspector-object-value .objectValueNull {
         color: ${theme.OBJECT_VALUE_NULL_COLOR};
@@ -137,6 +117,19 @@ const baseStyles = (theme) => {
     granite-inspector-object-label div {
         display: flex;
         flex-flow: row wrap;
+    }
+
+    granite-inspector-object-preview {
+        font-style: italic;
+    }
+
+    granite-inspector-object-preview,
+    granite-inspector-object-value  {
+        font-size: 0px;
+    }
+    granite-inspector-object-preview span,
+    granite-inspector-object-value span {
+        font-size: ${theme.TREENODE_FONT_SIZE};
     }
 
     table-inspector  {
@@ -226,7 +219,7 @@ const baseStyles = (theme) => {
       line-height: 14px;
       background-color: ${theme.TABLE_TH_BACKGROUND_COLOR};
       border-bottom: 1px solid ${theme.TABLE_BORDER_COLOR};
-
+    }
 
     table-inspector-th:hover {
       background-color: ${theme.TABLE_TH_HOVER_COLOR};
@@ -259,6 +252,8 @@ const baseStyles = (theme) => {
       user-select: none;
       color: ${theme.TABLE_SORT_ICON_COLOR};
     }
+
+
 `;
 };
 

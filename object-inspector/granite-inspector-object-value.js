@@ -21,9 +21,7 @@ class GraniteInspectorObjectValue extends LitElement {
   }
 
   _render({ data, closed }) {
-    return html`
-      ${this.markup(data, closed)}
-    `;
+    return html`${this.markup(data, closed)}`;
   }
 
   static get properties() {
@@ -37,44 +35,42 @@ class GraniteInspectorObjectValue extends LitElement {
   markup() {
     switch (typeof this.data) {
       case 'number':
-        return html`<div class='objectValueNumber'>${this.data}</div>`;
+        return html`<span class='objectValueNumber'>${this.data}</span>`;
       case 'string':
-        return html`<div class='objectValueString'>"${this.data}"</div>`;
+        return html`<span class='objectValueString'>"${this.data}"</span>`;
       case 'boolean':
-        return html`<div class='objectValueBoolean'>${String(this.data)}</div>`;
+        return html`<span class='objectValueBoolean'>${String(this.data)}</span>`;
       case 'undefined':
-        return html`<div class='objectValueUndefined'>undefined</div>`;
+        return html`<span class='objectValueUndefined'>undefined</span>`;
       case 'object':
         if (this.data === null) {
-          return html`<div class='objectValueNull'>null</div>`;
+          return html`<span class='objectValueNull'>null</span>`;
         }
         if (this.data instanceof Date) {
-          return html`<div>${this.data.toString()}</div>`;
+          return html`<span>${this.data.toString()}</span>`;
         }
         if (this.data instanceof RegExp) {
-          return html`<div class='objectValueRegExp'>${this.data.toString()}</div>`;
+          return html`<span class='objectValueRegExp'>${this.data.toString()}</span>`;
         }
         if (this.data instanceof Array) {
-          return html`<div>${`Array[${this.data.length}]`}</div>`;
+          return html`<span>${`Array[${this.data.length}]`}</span>`;
         }
         if (this.data.constructor.name == 'Object') {
           if (this.closed) {
-            return html`<div>{…}</div>`;
+            return html`<span>{…}</span>`;
           }
           return this._renderObject(this.data);
         }
-        return html`<div>${this.data.constructor.name}</div>`;
+        return html`<span>${this.data.constructor.name}</span>`;
       case 'function':
         return html`
-          <div>
-            <div class='objectValueFunctionKeyword'>function</div>
-            <div class='objectValueFunctionName'>&nbsp;${this.data.name}()</div>
-          </div>
+          <span class='objectValueFunctionKeyword'>function</span>
+          <span class='objectValueFunctionName'>&nbsp;${this.data.name}()</span>
         `;
       case 'symbol':
-        return html`<div class='objectValueSymbol'>${this.data.toString()}</div>`;
+        return html`<span class='objectValueSymbol'>${this.data.toString()}</span>`;
       default:
-        return `<div />`;
+        return `<span />`;
     }
   }
 
@@ -86,14 +82,13 @@ class GraniteInspectorObjectValue extends LitElement {
         let ellipsis = '';
         if (propertyNodes.length === this.maxProperties - 1 &&
             Object.keys(object).length > this.maxProperties) {
-          ellipsis = html`<div>…</div>`;
+          ellipsis = html`<span>…</span>`;
         }
         propertyNodes.push(html`
-        <div>
-          <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>:&nbsp;
+          <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>
+          <span>:&nbsp;</span>
           <granite-inspector-object-value data=${propertyValue} closed></granite-inspector-object-value>
-          ${ellipsis}
-        </div>`);
+          ${ellipsis}`);
         if (ellipsis != '') break;
       }
     }
@@ -101,9 +96,9 @@ class GraniteInspectorObjectValue extends LitElement {
       return html`${this.data.constructor.name} {}`;
     }
     return html`
-    <div>
-      {${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`,&nbsp;` : ``}`)}}
-    </div>
+      <span>{</span>
+      ${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`<span>,&nbsp;</span>>` : ``}`)}
+      <span>}</span>
   `;
   }
 }
