@@ -114,19 +114,16 @@ const baseStyles = (theme) => {
         font-style: italic;
     }
 
-    granite-inspector-object-label div {
-        display: flex;
-        flex-flow: row wrap;
-    }
-
     granite-inspector-object-preview {
         font-style: italic;
     }
 
+    granite-inspector-object-label,
     granite-inspector-object-preview,
     granite-inspector-object-value  {
         font-size: 0px;
     }
+    granite-inspector-object-label span,
     granite-inspector-object-preview span,
     granite-inspector-object-value span {
         font-size: ${theme.TREENODE_FONT_SIZE};

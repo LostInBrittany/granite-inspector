@@ -22,7 +22,7 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
             name=${name}
             path=${path}
             data=${data}
-            expanded=${expanded}
+            expanded=${expandedPaths && !!expandedPaths[path]}
             depth=${depth}
             childTreeNodes=${dataIterator ? this.generateChildren(data, path) : '' }
             nodeRenderer=${nodeRenderer}
@@ -44,6 +44,26 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
        * Specify the optional name of the root node, default to undefined
        */
       name: String,
+      /**
+       * An integer specifying to which level the tree should be initially expanded
+       */
+      expandLevel: Number,
+      /**
+       * { Array<String> | String }
+       * An array containing all the paths that should be expanded when the component is initialized,
+       * or a string of just one path
+       * The path string is similar to JSONPath.
+       * It is a dot separated string like $.foo.bar. $.foo.bar expands the path $.foo.bar
+       * where $ refers to the root node. Note that it only expands that single node
+       * (but not all its parents and the root node). Instead, you should use
+       * expandPaths={['$', '$.foo', '$.foo.bar']} to expand all the way to the $.foo.bar node.
+       * You can refer to array index paths using ['$', '$.1']
+       * You can use wildcard to expand all paths on a specific level
+       * For example, to expand all first level and second level nodes, use ['$', '$.*']
+       * (equivalent to expandLevel={2}).
+       * The results are merged with expandLevel
+       */
+      expandPaths: Object,
       /**
        * The current node path
        */
@@ -70,6 +90,7 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    // this.expandedPaths = getExpandedPaths(this.data, this.dataIterator,this.expandedPaths, this.expandLevel);
   }
 
   hasChildNodes(parentData) {
@@ -95,7 +116,8 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
             showNonEnumerable=${this.showNonEnumerable ? this.showNonEnumerable : isNonEnumerable}
             sortObjectKeys=${this.sortObjectKeys}
             dataIterator=${this.dataIterator}
-            nodeRenderer=${this.nodeRenderer}></granite-inspector-connected-tree-node>`
+            nodeRenderer=${this.nodeRenderer}
+            expandedPaths=${this.expandedPaths}></granite-inspector-connected-tree-node>`
       );
     }
     return childTreeNodes;

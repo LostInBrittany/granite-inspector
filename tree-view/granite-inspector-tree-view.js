@@ -1,6 +1,7 @@
 import { html, LitElement } from '@polymer/lit-element';
 
 import './granite-inspector-connected-tree-node';
+import {getExpandedPaths} from '../tools/pathUtils';
 
 class GraniteInspectorTreeView extends LitElement {
   /**
@@ -13,7 +14,7 @@ class GraniteInspectorTreeView extends LitElement {
     return this;
   }
 
-  _render({data, name, dataIterator, sortObjectKeys, showNonEnumerable, nodeRenderer, expandedPaths}) {
+  _render({data, name, expandLevel, expandPaths, dataIterator, sortObjectKeys, showNonEnumerable, nodeRenderer}) {
     return html`
     <granite-inspector-connected-tree-node
         name=${name}
@@ -24,7 +25,7 @@ class GraniteInspectorTreeView extends LitElement {
         sortObjectKeys=${sortObjectKeys}
         dataIterator=${dataIterator}
         nodeRenderer=${nodeRenderer}
-        expandedPaths=${expandedPaths}></granite-inspector-connected-tree-node>
+        expandedPaths=${getExpandedPaths(data,dataIterator,expandPaths,expandLevel)}></granite-inspector-connected-tree-node>
     `;
   }
 
@@ -77,10 +78,6 @@ class GraniteInspectorTreeView extends LitElement {
        */
       dataIterator: Function,
 
-      /**
-       * The current expanded paths
-       */
-      expandedPaths: Array,
     };
   }
 
