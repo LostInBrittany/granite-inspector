@@ -32,14 +32,16 @@ class GraniteInspectorTreeNode extends LitElement {
             : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : ''}
           ${nodeRenderer(this)}
         </div>
-        <div>
-          ${childTreeNodes.length > 0
-            ? html`
-              <ol role="group" class="treeNodeChildNodesContainer"  expanded?=${expanded}>
-                ${childTreeNodes}
-              </ol>`
-            : ''}
-        </div>
+        ${ expanded ? html`
+          <div>
+            ${childTreeNodes.length > 0
+              ? html`
+                <ol role="group" class="treeNodeChildNodesContainer"  expanded?=${expanded}>
+                  ${childTreeNodes}
+                </ol>`
+              : ''}
+          </div>
+          ` : ``}
       </li>
     `;
   }
