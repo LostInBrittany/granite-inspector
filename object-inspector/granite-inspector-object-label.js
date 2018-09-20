@@ -10,26 +10,26 @@ class GraniteInspectorObjectLabel extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({name, data, isNonEnumerable}) {
+  render() {
     return html`
       <granite-inspector-object-name 
-          name=${name} 
-          dimmed=${isNonEnumerable}></granite-inspector-object-name>
+          .name=${this.name} 
+          .dimmed=${this.isNonEnumerable}></granite-inspector-object-name>
       <span>:&nbsp;</span>
       <granite-inspector-object-value 
-          data=${data}></granite-inspector-object-value>
+          .data=${this.data}></granite-inspector-object-value>
     `;
   }
 
   static get properties() {
     return {
-      data: Object,
-      name: String,
-      isNonEnumerable: Boolean,
+      data: {type: Object},
+      name: {type: String},
+      isNonEnumerable: {type: Boolean},
     };
   }
 }

@@ -10,31 +10,31 @@ class GraniteInspectorObjectRootLabel extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({name, data}) {
-    if (typeof name === 'string') {
+  render() {
+    if (typeof this.name === 'string') {
       return html`
         <granite-inspector-object-name 
-            name=${name}></granite-inspector-object-name>
+            .name=${this.name}></granite-inspector-object-name>
         <span>:&nbsp;</span>
         <granite-inspector-object-preview 
-            data=${data}></granite-inspector-object-preview>
+            .data=${this.data}></granite-inspector-object-preview>
       `;
     } else {
       return html`
         <granite-inspector-object-preview 
-            data=${data}></granite-inspector-object-preview>
+           .data=${this.data}></granite-inspector-object-preview>
       `;
     }
   }
 
   static get properties() {
     return {
-      data: Object,
-      name: String,
+      data: {type: Object},
+      name: {type: String},
     };
   }
 }

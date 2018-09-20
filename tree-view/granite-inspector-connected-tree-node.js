@@ -9,28 +9,24 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({name, path, data,
-          expanded, depth, dataIterator,
-          nodeRenderer, showNonEnumerable,
-          sortObjectKeys, expandedPaths}) {
+  render() {
     return html`
       <granite-inspector-tree-node
-            name=${name}
-            path=${path}
-            data=${data}
-            expanded=${expandedPaths && !!expandedPaths[path]}
-            depth=${depth}
-            childTreeNodes=${dataIterator ? this.generateChildren(data, path) : '' }
-            nodeRenderer=${nodeRenderer}
-            shouldShowArrow=${this.hasChildNodes(data)}
-            showNonEnumerable=${showNonEnumerable}
-            sortObjectKeys=${sortObjectKeys}
-            shouldShowPlaceholder=${depth > 0} >                    
-        </granite-inspector-tree-node>
+          .name=${this.name}
+          .path=${this.path}
+          .data=${this.data}
+          .expanded=${this.expandedPaths && !!this.expandedPaths[this.path]}
+          .depth=${this.depth}
+          .childTreeNodes="${this.dataIterator ? this.generateChildren(this.data, this.path) : '' }"
+          .nodeRenderer=${this.nodeRenderer}
+          .shouldShowArrow=${this.hasChildNodes(this.data)}
+          .showNonEnumerable=${this.showNonEnumerable}
+          .sortObjectKeys=${this.sortObjectKeys}
+          .shouldShowPlaceholder=${this.depth > 0} ></granite-inspector-tree-node>
     `;
   }
 
@@ -39,15 +35,15 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
       /**
        * The Javascript object you would like to inspect
        */
-      data: Object,
+      data: {type: Object},
       /**
        * Specify the optional name of the root node, default to undefined
        */
-      name: String,
+      name: {type: String},
       /**
        * An integer specifying to which level the tree should be initially expanded
        */
-      expandLevel: Number,
+      expandLevel: {type: Number},
       /**
        * { Array<String> | String }
        * An array containing all the paths that should be expanded when the component is initialized,
@@ -63,28 +59,28 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
        * (equivalent to expandLevel={2}).
        * The results are merged with expandLevel
        */
-      expandPaths: Object,
+      expandPaths: {type: Object},
       /**
        * The current node path
        */
-      path: String,
+      path: {type: String},
       /**
        * show non-enumerable properties.
        */
-      showNonEnumerable: Boolean,
+      showNonEnumerable: {type: Boolean},
       /**
        * Use a custom nodeRenderer to render the object properties (optional)
        */
-      nodeRenderer: Function,
+      nodeRenderer: {type: Function},
       /**
        * The data iterator
        */
-      dataIterator: Function,
+      dataIterator: {type: Function},
 
-      expandedPaths: Object,
-      isNotEnumerable: Boolean,
-      expanded: Boolean,
-      depth: Number,
+      expandedPaths: {type: Object},
+      isNotEnumerable: {type: Boolean},
+      expanded: {type: Boolean},
+      depth: {type: Number},
     };
   }
 
@@ -108,16 +104,16 @@ class GraniteInspectorConnectedTreeNode extends LitElement {
       const path = `${parentPath}.${key}`;
       childTreeNodes.push(html`
         <granite-inspector-connected-tree-node
-            name=${name}
-            data=${data}
-            depth=${this.depth + 1}
-            path=${path}
-            shouldShowArrow=${isNonEnumerable || false}
-            showNonEnumerable=${this.showNonEnumerable ? this.showNonEnumerable : isNonEnumerable}
-            sortObjectKeys=${this.sortObjectKeys}
-            dataIterator=${this.dataIterator}
-            nodeRenderer=${this.nodeRenderer}
-            expandedPaths=${this.expandedPaths}></granite-inspector-connected-tree-node>`
+            .name=${name}
+            .data=${data}
+            .depth=${this.depth + 1}
+            .path=${path}
+            .shouldShowArrow=${isNonEnumerable || false}
+            .showNonEnumerable=${this.showNonEnumerable ? this.showNonEnumerable : isNonEnumerable}
+            .sortObjectKeys=${this.sortObjectKeys}
+            .dataIterator=${this.dataIterator}
+            .nodeRenderer=${this.nodeRenderer}
+            .expandedPaths=${this.expandedPaths}></granite-inspector-connected-tree-node>`
       );
     }
     return childTreeNodes;

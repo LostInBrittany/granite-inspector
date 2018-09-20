@@ -16,18 +16,18 @@ class GraniteInspectorObjectName extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({name, dimmed}) {
-    return html`<span dimmed$=${dimmed}>${name}</span>`;
+  render() {
+    return html`<span ?dimmed=${this.dimmed}>${this.name}</span>`;
   }
 
   static get properties() {
     return {
-      name: String,
-      dimmed: Boolean,
+      name: {type: String},
+      dimmed: {type: Boolean},
     };
   }
 }

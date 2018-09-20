@@ -8,36 +8,30 @@ class GraniteInspectorTreeNode extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({
-      data,
-      path,
-      expanded,
-      childTreeNodes,
-      nodeRenderer,
-      shouldShowArrow,
-      shouldShowPlaceholder,
-  }) {
-    let expandable = shouldShowArrow && childTreeNodes.length > 0;
+  render() {
+    let expandable = this.shouldShowArrow && this.childTreeNodes.length > 0;
     return html`
-      <li aria-expanded$=${expanded} 
-          role="treeitem" class='treeNodeBase' 
-          on-click="${(evt) => this.toggleExpand(evt)}">
-        <div  path=${path} class="treeNodePreviewContainer clickableNode">
+      <li 
+          ?aria-expanded=${this.expanded} 
+          role="treeitem" 
+          class='treeNodeBase' 
+          @click="${(evt) => this.toggleExpand(evt)}">
+        <div  path=${this.path} class="treeNodePreviewContainer clickableNode">
           ${expandable
-            ? html`<div class="treeArrow" expanded?=${expanded}>▶</div>`
-            : shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : ''}
-          ${nodeRenderer(this)}
+            ? html`<div class="treeArrow" ?expanded=${this.expanded}>▶</div>`
+            : this.shouldShowPlaceholder ? html`<span class="treeNodePlaceholder">&nbsp;</span>` : ''}
+          ${this.nodeRenderer(this)}
         </div>
-        ${ expanded ? html`
+        ${ this.expanded ? html`
           <div>
-            ${childTreeNodes.length > 0
+            ${this.childTreeNodes.length > 0
               ? html`
-                <ol role="group" class="treeNodeChildNodesContainer"  expanded?=${expanded}>
-                  ${childTreeNodes}
+                <ol role="group" class="treeNodeChildNodesContainer"  ?expanded=${this.expanded}>
+                  ${this.childTreeNodes}
                 </ol>`
               : ''}
           </div>
@@ -52,36 +46,36 @@ class GraniteInspectorTreeNode extends LitElement {
       /**
        * The Javascript object you would like to inspect
        */
-      data: Object,
+      data: {type: Object},
       /**
        * Specify the optional name of the root node, default to undefined
        */
-      name: String,
+      name: {type: String},
       /**
        * The current node path
        */
-      path: String,
+      path: {type: String},
       /**
        * show non-enumerable properties.
        */
-      showNonEnumerable: Boolean,
+      showNonEnumerable: {type: Boolean},
       /**
        * Use a custom nodeRenderer to render the object properties (optional)
        */
-      nodeRenderer: Function,
+      nodeRenderer: {type: Function},
       /**
        * The data iterator
        */
-      dataIterator: Function,
+      dataIterator: {type: Function},
 
-      childTreeNodes: Array,
-      expanded: Boolean,
-      depth: Number,
-      shouldShowArrow: Boolean,
-      sortObjectKeys: Boolean,
-      shouldShowPlaceholder: Boolean,
+      childTreeNodes: {type: Array},
+      expanded: {type: Boolean},
+      depth: {type: Number},
+      shouldShowArrow: {type: Boolean},
+      sortObjectKeys: {type: Boolean},
+      shouldShowPlaceholder: {type: Boolean},
 
-      onClick: Function,
+      onClick: {type: Function},
     };
   }
 

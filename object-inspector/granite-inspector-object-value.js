@@ -16,18 +16,18 @@ class GraniteInspectorObjectValue extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({ data, closed }) {
-    return html`${this.markup(data, closed)}`;
+  render() {
+    return html`${this.markup(this.data, this.closed)}`;
   }
 
   static get properties() {
     return {
-      data: Object,
-      closed: Boolean,
+      data: {type: Object},
+      closed: {type: Boolean},
     };
   }
 
@@ -85,9 +85,9 @@ class GraniteInspectorObjectValue extends LitElement {
           ellipsis = html`<span>…</span>`;
         }
         propertyNodes.push(html`
-          <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>
+          <granite-inspector-object-name .name=${propertyName}></granite-inspector-object-name>
           <span>:&nbsp;</span>
-          <granite-inspector-object-value data=${propertyValue} closed></granite-inspector-object-value>
+          <granite-inspector-object-value .data=${propertyValue} closed></granite-inspector-object-value>
           ${ellipsis}`);
         if (ellipsis != '') break;
       }
@@ -97,7 +97,8 @@ class GraniteInspectorObjectValue extends LitElement {
     }
     return html`
       <span>{</span>
-      ${propertyNodes.map((element, i) => html`${element}${i<propertyNodes.length-1 ? html`<span>,&nbsp;</span>>` : ``}`)}
+      ${propertyNodes.map((element, i) =>
+          html`${element}${i<propertyNodes.length-1 ? html`<span>,&nbsp;</span>>` : ``}`)}
       <span>}</span>
   `;
   }

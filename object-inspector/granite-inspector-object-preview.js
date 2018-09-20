@@ -20,20 +20,20 @@ class GraniteInspectorObjectPreview extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({ data }) {
+  render() {
     return html`
-      ${this.markup(data)}
+      ${this.markup(this.data)}
     `;
   }
 
   static get properties() {
     return {
-      data: Object,
-      maxProperties: Number,
+      data: {type: Object},
+      maxProperties: {type: Number},
     };
   }
 
@@ -48,7 +48,7 @@ class GraniteInspectorObjectPreview extends LitElement {
         this.data === null ||
         this.data instanceof Date ||
         this.data instanceof RegExp) {
-      return html`<granite-inspector-object-value data=${this.data}></granite-inspector-object-value>`;
+      return html`<granite-inspector-object-value .data=${this.data}></granite-inspector-object-value>`;
     }
 
     if (this.data instanceof Array) {
@@ -58,7 +58,7 @@ class GraniteInspectorObjectPreview extends LitElement {
             html`${
               this.data.map((element, i) => {
                 return html`
-                  <granite-inspector-object-value data=${element}></granite-inspector-object-value>
+                  <granite-inspector-object-value .data=${element}></granite-inspector-object-value>
                   ${i<this.data.length-1 ? html`<span>,&nbsp;</span>` : ``}
                 `;
               })
@@ -67,7 +67,7 @@ class GraniteInspectorObjectPreview extends LitElement {
           ]
       `;
     } else if (typeof this.data === 'string') {
-      return html`<granite-inspector-object-value data='${this.data}' ></granite-inspector-object-value>`;
+      return html`<granite-inspector-object-value .data='${this.data}' ></granite-inspector-object-value>`;
     } else {
       let propertyNodes = [];
       for (let propertyName in this.data) {
@@ -79,8 +79,8 @@ class GraniteInspectorObjectPreview extends LitElement {
             ellipsis = html`<span>…</span>`;
           }
           propertyNodes.push(html`
-            <granite-inspector-object-name name=${propertyName}></granite-inspector-object-name>:&nbsp;
-            <granite-inspector-object-value data=${propertyValue}></granite-inspector-object-value>
+            <granite-inspector-object-name .name=${propertyName}></granite-inspector-object-name>:&nbsp;
+            <granite-inspector-object-value .data=${propertyValue}></granite-inspector-object-value>
             ${ellipsis}`);
           if (ellipsis != '') break;
         }

@@ -16,13 +16,13 @@
   "author": "Horacio Gonzalez <horacio.gonzalez@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@polymer/lit-element": "0.5.2",
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/lit-element": "^0.6.1"
   },
   "devDependencies": {
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@polymer/polymer": "^3.0.5",
+    "@webcomponents/webcomponentsjs": "^2.1.3",
     "wct-browser-legacy": "^1.0.0"
   },
-  "version": "1.2.1"
+  "version": "1.3.0"
 }

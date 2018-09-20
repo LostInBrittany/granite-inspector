@@ -11,20 +11,18 @@ import './object-inspector/granite-inspector-object';
  * @demo demo/index.html
  */
 class GraniteInspector extends LitElement {
-  _render({ data, name, theme,
-    expandLevel, expandPaths, sortObjectKeys,
-    showNonEnumerable, nodeRenderer, dataIterator }) {
+  render() {
     return html`
       <granite-inspector-object 
-          theme=${theme}
-          name=${name}
-          data=${data}
-          expandLevel=${expandLevel}
-          expandPath=${expandPaths}
-          showNonEnumerable=${showNonEnumerable}
-          sortObjectKeys=${sortObjectKeys}
-          nodeRenderer=${nodeRenderer}
-          dataIterator=${dataIterator}></granite-inspector-object>
+          .theme=${this.theme}
+          .name=${this.name}
+          .data=${this.data}
+          .ng-focusexpandLevel=${this.expandLevel}
+          .expandPath=${this.expandPaths}
+          .showNonEnumerable=${this.showNonEnumerable}
+          .sortObjectKeys=${this.sortObjectKeys}
+          .nodeRenderer=${this.nodeRenderer}
+          .dataIterator=${this.dataIterator}></granite-inspector-object>
     `;
   }
 
@@ -33,19 +31,19 @@ class GraniteInspector extends LitElement {
       /**
        * The Javascript object you would like to inspect
        */
-      data: Object,
+      data: {type: Object},
       /**
        * Specify the optional name of the root node, default to undefined
        */
-      name: String,
+      name: {type: String},
       /**
        * The theme, defaults to chromeLight
        */
-      theme: String,
+      theme: {type: String},
       /**
        * An integer specifying to which level the tree should be initially expanded
        */
-      expandLevel: Number,
+      expandLevel: {type: Number},
       /**
        * { Array<String> | String }
        * An array containing all the paths that should be expanded when the component is initialized,
@@ -61,24 +59,24 @@ class GraniteInspector extends LitElement {
        * (equivalent to expandLevel={2}).
        * The results are merged with expandLevel
        */
-      expandPaths: Object,
+      expandPaths: {type: Object},
       /**
        * { Boolean | Function }
        * Sort object keys with optional compare function
        */
-      sortObjectKeys: Object,
+      sortObjectKeys: {type: Object},
       /**
        * show non-enumerable properties.
        */
-      showNonEnumerable: Boolean,
+      showNonEnumerable: {type: Boolean},
       /**
        * Use a custom nodeRenderer to render the object properties (optional)
        */
-      nodeRenderer: Function,
+      nodeRenderer: {type: Function},
       /**
        * The data iterator
        */
-      dataIterator: Function,
+      dataIterator: {type: Function},
     };
   }
 

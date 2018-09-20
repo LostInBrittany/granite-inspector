@@ -19,15 +19,31 @@
       <style is="custom-style" include="demo-pages-shared-styles">
       </style>
     </custom-style>
+
+    <script type="module">
+      import { html, LitElement } from '@polymer/lit-element';
+
+      let obj = ['a', 'b', { 'c': 'd', 'e': 'f', 'g': { 'h': 'i', 'j': 'k'}}];
+
+      class GraniteInspectorDemo extends LitElement {
+        render() {
+          return html`
+            <granite-inspector 
+                .data=${obj}
+                .expandLevel=0></granite-inspector>
+          `;
+        }
+      }
+      window.customElements.define('granite-inspector-demo', GraniteInspectorDemo);
+
+    </script>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h3>Basic granite-inspector demo</h3>
       <demo-snippet>
         <template>
-          <granite-inspector 
-              data='["a", "b", { "c": "d", "e": "f", "g": { "h": "i", "j": "k"}}]'
-              expandLevel=0></granite-inspector>
+          <granite-inspector-demo></granite-inspector-demo>
         </template>
       </demo-snippet>
     </div>

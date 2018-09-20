@@ -10,22 +10,22 @@ class GraniteInspectorTreeView extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({data, name, expandLevel, expandPaths, dataIterator, sortObjectKeys, showNonEnumerable, nodeRenderer}) {
+  render() {
     return html`
     <granite-inspector-connected-tree-node
-        name=${name}
-        data=${data}
-        depth=0
-        path=${this.DEFAULT_ROOT_PATH}
-        showNonEnumerable=${showNonEnumerable}
-        sortObjectKeys=${sortObjectKeys}
-        dataIterator=${dataIterator}
-        nodeRenderer=${nodeRenderer}
-        expandedPaths=${getExpandedPaths(data,dataIterator,expandPaths,expandLevel)}></granite-inspector-connected-tree-node>
+        .name=${this.name}
+        .data=${this.data}
+        .depth=${0}
+        .path=${this.DEFAULT_ROOT_PATH}
+        .showNonEnumerable=${this.showNonEnumerable}
+        .sortObjectKeys=${this.sortObjectKeys}
+        .dataIterator=${this.dataIterator}
+        .nodeRenderer=${this.nodeRenderer}
+        .expandedPaths=${getExpandedPaths(this.data,this.dataIterator,this.expandPaths,this.expandLevel)}></granite-inspector-connected-tree-node>
     `;
   }
 
@@ -34,15 +34,15 @@ class GraniteInspectorTreeView extends LitElement {
       /**
        * The Javascript object you would like to inspect
        */
-      data: Object,
+      data: {type: Object},
       /**
        * Specify the optional name of the root node, default to undefined
        */
-      name: String,
+      name: {type: String},
       /**
        * An integer specifying to which level the tree should be initially expanded
        */
-      expandLevel: Number,
+      expandLevel: {type: Number},
       /**
        * { Array<String> | String }
        * An array containing all the paths that should be expanded when the component is initialized,
@@ -58,25 +58,25 @@ class GraniteInspectorTreeView extends LitElement {
        * (equivalent to expandLevel={2}).
        * The results are merged with expandLevel
        */
-      expandPaths: Object,
+      expandPaths: {type: Object},
       /**
        * { Boolean | Function }
        * Sort object keys with optional compare function
        */
-      sortObjectKeys: Object,
+      sortObjectKeys: {type: Object},
       /**
        * show non-enumerable properties.
        */
-      showNonEnumerable: Boolean,
+      showNonEnumerable: {type: Boolean},
       /**
        * Use a custom nodeRenderer to render the object properties (optional)
        */
-      nodeRenderer: Function,
+      nodeRenderer: {type: Function},
 
       /**
        * A function to iterate data
        */
-      dataIterator: Function,
+      dataIterator: {type: Function},
 
     };
   }

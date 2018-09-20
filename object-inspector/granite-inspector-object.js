@@ -3,11 +3,6 @@ import styles from '../styles/createStyles';
 import createIterator from '../tools/createIterator';
 import defaultNodeRenderer from '../tools/defaultNodeRenderer';
 import '../tree-view/granite-inspector-tree-view';
-import './granite-inspector-object-label';
-import './granite-inspector-object-root-label';
-
-
-
 
 class GraniteInspectorObject extends LitElement {
   /**
@@ -16,28 +11,26 @@ class GraniteInspectorObject extends LitElement {
    * @overrides
    * @return {Object} this
    */
-  _createRoot() {
+  createRenderRoot() {
     return this;
   }
 
-  _render({ data, name, theme,
-    expandLevel, expandPaths, sortObjectKeys,
-    showNonEnumerable, nodeRenderer, dataIterator }) {
+  render() {
     return html`
       <style>
-        ${styles[theme]}
+        ${styles[this.theme]}
       </style>
 
       <granite-inspector-tree-view
-        theme=${theme}
-        name=${name}
-        data=${data}
-        expandLevel=${expandLevel}
-        expandPath=${expandPaths}
-        showNonEnumerable=${showNonEnumerable}
-        sortObjectKeys=${sortObjectKeys}
-        nodeRenderer=${nodeRenderer}
-        dataIterator=${dataIterator}></granite-inspector-tree-view>
+        .theme=${this.theme}
+        .name=${this.name}
+        .data=${this.data}
+        .expandLevel=${this.expandLevel}
+        .expandPath=${this.expandPaths}
+        .showNonEnumerable=${this.showNonEnumerable}
+        .sortObjectKeys=${this.sortObjectKeys}
+        .nodeRenderer=${this.nodeRenderer}
+        .dataIterator=${this.dataIterator}></granite-inspector-tree-view>
     `;
   }
 
@@ -46,19 +39,19 @@ class GraniteInspectorObject extends LitElement {
       /**
        * The Javascript object you would like to inspect
        */
-      data: Object,
+      data: {type: Object},
       /**
        * Specify the optional name of the root node, default to undefined
        */
-      name: String,
+      name: {type: String},
       /**
        * The theme, defaults to chromeLight
        */
-      theme: String,
+      theme: {type: String},
       /**
        * An integer specifying to which level the tree should be initially expanded
        */
-      expandLevel: Number,
+      expandLevel: {type: Number},
       /**
        * { Array<String> | String }
        * An array containing all the paths that should be expanded when the component is initialized,
@@ -74,24 +67,24 @@ class GraniteInspectorObject extends LitElement {
        * (equivalent to expandLevel={2}).
        * The results are merged with expandLevel
        */
-      expandPaths: Object,
+      expandPaths: {type: Object},
       /**
        * { Boolean | Function }
        * Sort object keys with optional compare function
        */
-      sortObjectKeys: Object,
+      sortObjectKeys: {type: Object},
       /**
        * show non-enumerable properties.
        */
-      showNonEnumerable: Boolean,
+      showNonEnumerable: {type: Boolean},
       /**
        * Use a custom nodeRenderer to render the object properties (optional)
        */
-      nodeRenderer: Function,
+      nodeRenderer: {type: Function},
       /**
        * The data iterator
        */
-      dataIterator: Function,
+      dataIterator: {type: Function},
     };
   }
 
